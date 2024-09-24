@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Registration Form</title>
+    <script>
+        function validateForm() {
+            var fname = document.forms["regForm"]["fname"].value;
+            var lname = document.forms["regForm"]["lname"].value;
+            var email = document.forms["regForm"]["email"].value;
+            var password = document.forms["regForm"]["password"].value;
+            var dob = document.forms["regForm"]["dob"].value;
+            var gender = document.forms["regForm"]["gender"].value;
+            var mobile = document.forms["regForm"]["mobile"].value;
+            var address = document.forms["regForm"]["address"].value;
+
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            var mobilePattern = /^\d{10}$/;
+
+            // Validation checks
+            if (fname == "") {
+                alert("First Name must be filled out");
+                return false;
+            }
+            if (lname == "") {
+                alert("Last Name must be filled out");
+                return false;
+            }
+            if (email == "" || !emailPattern.test(email)) {
+                alert("Please enter a valid email");
+                return false;
+            }
+            if (password == "") {
+                alert("Password must be filled out");
+                return false;
+            }
+            if (dob == "") {
+                alert("Please select your date of birth");
+                return false;
+            }
+            if (gender == "") {
+                alert("Please select your gender");
+                return false;
+            }
+            if (mobile == "" || !mobilePattern.test(mobile)) {
+                alert("Please enter a valid 10-digit mobile number");
+                return false;
+            }
+            if (address == "") {
+                alert("Address must be filled out");
+                return false;
+            }
+
+            // Check if at least one hobby is selected
+            var hobbies = document.querySelectorAll('input[name="hobby"]:checked');
+            if (hobbies.length === 0) {
+                alert("Please select at least one hobby");
+                return false;
+            }
+
+            return true; // All validations passed
+        }
+    </script>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        center {
+            margin-top: 50px;
+        }
+
+        fieldset {
+            width: 50%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #e6f7ff; /* Background color added */
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table td {
+            padding: 10px;
+            vertical-align: top;
+        }
+
+        table input, table textarea {
+            width: 95%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"], input[type="reset"] {
+            padding: 10px 15px;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        input[type="submit"] {
+            background-color: #5cb85c;
+        }
+
+        input[type="reset"] {
+            background-color: #d9534f;
+        }
+
+        /* Align gender and hobbies properly */
+        .gender-options, .hobby-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .gender-options label, .hobby-options label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Button alignment */
+        .button-container {
+            display: flex;
+            justify-content: flex-start;
+            gap: 10px;
+        }
+
+        /* Responsive styles */
+        @media screen and (max-width: 768px) {
+            fieldset {
+                width: 90%;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            fieldset {
+                width: 95%;
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            table, table td {
+                display: block;
+                width: 100%;
+            }
+
+            table td {
+                margin-bottom: 15px;
+            }
+
+            input, textarea {
+                font-size: 16px;
+                padding: 6px;
+            }
+
+            input[type="submit"], input[type="reset"] {
+                width: 100%;
+                padding: 12px;
+                font-size: 18px;
+            }
+
+            .gender-options, .hobby-options {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+<center>
+<fieldset>
+<form name="regForm" onsubmit="return validateForm()">
+    <h1><u>Registration Form</u></h1>
+    <table cellpadding="7" cellspacing="7">
+        <tr>
+            <td><b>First Name:</b></td>
+            <td><input type="text" name="fname"></td>
+        </tr>
+        <tr>
+            <td><b>Last Name:</b></td>
+            <td><input type="text" name="lname"></td>
+        </tr>
+        <tr>
+            <td><b>Email:</b></td>
+            <td><input type="email" name="email" placeholder="example@gmail.com"></td>
+        </tr>
+        <tr>
+            <td><b>Password:</b></td>
+            <td><input type="password" name="password"></td>
+        </tr>
+        <tr>
+            <td><b>Date of Birth:</b></td>
+            <td><input type="date" name="dob"></td>
+        </tr>
+        <tr>
+            <td><b>Gender:</b></td>
+            <td>
+                <div class="gender-options">
+                    <label><input type="radio" name="gender" value="Male"> Male</label>
+                    <label><input type="radio" name="gender" value="Female"> Female</label>
+                    <label><input type="radio" name="gender" value="Others"> Others</label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><b>Hobbies:</b></td>
+            <td>
+                <div class="hobby-options">
+                    <label><input type="checkbox" name="hobby" value="Dancing"> Dancing</label>
+                    <label><input type="checkbox" name="hobby" value="Swimming"> Swimming</label>
+                    <label><input type="checkbox" name="hobby" value="Reading"> Reading</label>
+                    <label><input type="checkbox" name="hobby" value="Baking"> Baking</label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><b>Mobile:</b></td>
+            <td><input type="tel" name="mobile"></td>
+        </tr>
+        <tr>
+            <td><b>Address:</b></td>
+            <td><textarea name="address" rows="5" cols="35"></textarea></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td colspan="2">
+                <div class="button-container">
+                    <input type="submit" value="Submit">
+                    <input type="reset" value="Reset">
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>
+</fieldset>
+</center>
+</body>
+</html>
